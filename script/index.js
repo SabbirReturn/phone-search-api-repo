@@ -13,10 +13,11 @@ let loadPhoneInformation= async(search=13)=>{
 }
 
 let displayShowAllPhone=(phones)=>{
-            console.log(phones);
+        console.log(phones);
         let phoneContainer = document.getElementById('phone-container')
         phoneContainer.textContent ='';
 
+        phones = phones.slice(0,12);
 
         phones.forEach(phone=>{
             console.log(phone)
@@ -42,17 +43,29 @@ let displayShowAllPhone=(phones)=>{
         phoneContainer.appendChild(phoneShow)
 
     })
+    toggleLoadingSpine(false);
 }
 
 // search phone
 
 let searchBtn = ()=>{
+    toggleLoadingSpine(true);
     let searchContainer = document.getElementById('search-container')
     let searchValue = searchContainer.value;
     console.log(searchValue)
     loadPhoneInformation(searchValue)
 }
 
+// Loading spine
 
+let toggleLoadingSpine = (isLoading)=>{
+    let loadingDot = document.getElementById('loadingDot')
+    if(isLoading){
+        loadingDot.classList.remove('hidden')
+    }
+    else{
+        loadingDot.classList.add('hidden')
+    }
+}
 
 loadPhoneInformation();

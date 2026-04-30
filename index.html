@@ -22,8 +22,10 @@
         </div>
     </header>
     <main class="container mx-auto mt-5">
+
         <!-- Search section -->
-         <section class="text-center my-5">
+
+        <section class="text-center my-5">
             <label class="input">
                 <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <g
@@ -40,7 +42,16 @@
                 <input id="search-container" type="search" required placeholder="Search" />
             </label>
             <button onclick="searchBtn()" class="btn">Search</button>
-         </section>
+        </section>
+
+
+        <!-- loading section -->
+        
+        <section>
+            <div class="text-center">
+                <span id="loadingDot" class="loading loading-dots loading-lg hidden"></span>
+            </div>
+        </section>
         <section class="mx-auto text-center">
             <div id="phone-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2">
                 <!-- <div class="card bg-base-100 w-96 shadow-sm">
@@ -57,6 +68,9 @@
                         </div>
                     </div>
                 </div> -->
+            </div>
+            <div>
+                <button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Show All</button>
             </div>
         </section>
     </main>
