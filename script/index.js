@@ -5,19 +5,30 @@ primaryBtn.classList.add('bg-indigo-700')
 
 // load all phone
 
-let loadPhoneInformation= async(search=13)=>{
+let loadPhoneInformation= async(search='samsung',isShowAll)=>{
     let res = await fetch( `https://openapi.programming-hero.com/api/phones?search=${search}`)
     let data = await res.json();
     let phones = data.data
-    displayShowAllPhone(phones)
+    displayShowAllPhone(phones,isShowAll)
 }
 
-let displayShowAllPhone=(phones)=>{
+let displayShowAllPhone=(phones,isShowAll)=>{
         console.log(phones);
         let phoneContainer = document.getElementById('phone-container')
         phoneContainer.textContent ='';
 
-        phones = phones.slice(0,12);
+        // show all phone
+        let showAll = document.getElementById('show-all-container')
+        if(phones.length>12 && !isShowAll){
+            showAll.classList.remove('hidden')
+        }
+        else{
+            showAll.classList.add('hidden')
+        }
+
+        if(!isShowAll){
+            phones = phones.slice(0,12);
+        }
 
         phones.forEach(phone=>{
             console.log(phone)
@@ -48,12 +59,12 @@ let displayShowAllPhone=(phones)=>{
 
 // search phone
 
-let searchBtn = ()=>{
+let searchBtn = (isShowAll)=>{
     toggleLoadingSpine(true);
     let searchContainer = document.getElementById('search-container')
     let searchValue = searchContainer.value;
     console.log(searchValue)
-    loadPhoneInformation(searchValue)
+    loadPhoneInformation(searchValue,isShowAll)
 }
 
 // Loading spine
@@ -66,6 +77,13 @@ let toggleLoadingSpine = (isLoading)=>{
     else{
         loadingDot.classList.add('hidden')
     }
+}
+
+
+//  handle show all
+
+let handleShoeAll = () =>{
+    searchBtn(true)
 }
 
 loadPhoneInformation();
