@@ -5,7 +5,7 @@ primaryBtn.classList.add('bg-indigo-700')
 
 // load all phone
 
-let loadPhoneInformation= async(search='samsung',isShowAll)=>{
+let loadPhoneInformation= async(search,isShowAll)=>{
     let res = await fetch( `https://openapi.programming-hero.com/api/phones?search=${search}`)
     let data = await res.json();
     let phones = data.data
@@ -13,7 +13,7 @@ let loadPhoneInformation= async(search='samsung',isShowAll)=>{
 }
 
 let displayShowAllPhone=(phones,isShowAll)=>{
-        console.log(phones);
+        // console.log(phones);
         let phoneContainer = document.getElementById('phone-container')
         phoneContainer.textContent ='';
 
@@ -31,7 +31,7 @@ let displayShowAllPhone=(phones,isShowAll)=>{
         }
 
         phones.forEach(phone=>{
-            console.log(phone)
+            // console.log(phone)
 
         // get phone details and view ui
 
@@ -47,7 +47,8 @@ let displayShowAllPhone=(phones,isShowAll)=>{
                         <h2 class="card-title">${phone.phone_name}</h2>
                         <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
                         <div class="card-actions justify-center">
-                            <button class="btn btn-primary">Show Details</button>
+                            <button onclick = "showDetails('${phone.slug}')"
+                            class="btn btn-primary">Show Details</button>
                         </div>
                     </div>
         `
@@ -63,7 +64,7 @@ let searchBtn = (isShowAll)=>{
     toggleLoadingSpine(true);
     let searchContainer = document.getElementById('search-container')
     let searchValue = searchContainer.value;
-    console.log(searchValue)
+    // console.log(searchValue)
     loadPhoneInformation(searchValue,isShowAll)
 }
 
@@ -85,5 +86,26 @@ let toggleLoadingSpine = (isLoading)=>{
 let handleShoeAll = () =>{
     searchBtn(true)
 }
+let showDetails = async(id)=>{
+    let res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
+    let getData = await res.json()
+    let phones = getData.data;
+    console.log(phones)
+    displayShowPhoneDetails(phones)
+    
+}
 
+let displayShowPhoneDetails = (phone)=>{
+    my_modal_2.showModal()
+    let phoneName = document.getElementById('phoneName')
+    phoneName.innerText = phone.name;
+  
+    let showDetailsContainer = document.getElementById('showDetailsContainer')
+    showDetailsContainer.innerHTML = `
+    <img class="w-full h-48 object-contain" src="${phone.image}" alt="">
+    <p><span>Storage:</span>${phone.mainFeatures.storage}</p>
+    `
+
+    
+}
 loadPhoneInformation();

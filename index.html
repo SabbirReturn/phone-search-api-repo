@@ -12,7 +12,7 @@
     <header>
         <div class="flex justify-between items-center mt-3 px-3 md:px-5 lg:px-10">
             <h1>Hot Gadget</h1>
-            <button id="primary-btn" class="btn btn-active btn-primary">Primary</button>
+            <button id="primary-btn" class="btn btn-active btn-primary">Sign In</button>
         </div>
         <div class="text-center mx-auto max-w-xl mt-4">
             <p class="leading-relaxed text-gray-600">Discover the latest smartphones from top brands, all in one place. We offer the best deals, genuine products, and fast, reliable service.Upgrade your mobile experience with quality devices you can trust.</p>
@@ -73,9 +73,28 @@
                 <button onclick="handleShoeAll()" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl">Show All</button>
             </div>
         </section>
+
+        <!-- modal -->
+
+        <section id="modalContainer">
+           <div>
+            <dialog id="my_modal_2" class="modal">
+            <div class="modal-box">
+                <h3 id="phoneName" class="text-lg font-bold"></h3>
+                <div id="showDetailsContainer">
+
+                </div>
+                <p class="py-4">Press ESC key or click outside to close</p>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+            </dialog>
+           </div>
+        </section>
     </main>
     <footer>
-
+        
     </footer>
     <!-- Script --> 
     <script src="script/index.js"></script>
