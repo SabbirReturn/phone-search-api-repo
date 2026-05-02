@@ -5,7 +5,7 @@ primaryBtn.classList.add('bg-indigo-700')
 
 // load all phone
 
-let loadPhoneInformation= async(search = 'samsung',isShowAll,hasSearch)=>{
+let loadPhoneInformation= async(search,isShowAll,hasSearch)=>{
     let res = await fetch( `https://openapi.programming-hero.com/api/phones?search=${search}`)
     let data = await res.json();
     let phones = data.data
