@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-[#edeef0] hover:bg-[#c7d4e9]">
+<body class="bg-[#edeef0] hover:bg-[#c7d4e9] w-full h-full">
     <header>
         <div class="flex justify-between items-center py-3 px-3 md:px-5 lg:px-48">
             <h1>Hot Gadget</h1>
@@ -60,10 +60,29 @@
             </div>
         </section>
         <section class="mx-auto text-center">
+
             <!-- No phone available -->
             <div id="availableUnavailable" class="hidden">
                 <p class="text-2xl text-red-700">No phone Available</p>
             </div>
+
+            <!-- always show some phone in ui -->
+             <div id="alwaysShowPhone" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-2 px-2">
+                <!-- <div class="card bg-base-100 w-96 shadow-sm">
+                    <figure>
+                        <img
+                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                        alt="Shoes" />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">Card Title</h2>
+                        <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Buy Now</button>
+                        </div>
+                    </div>
+                </div> -->
+             </div>
 
             <!-- Phone Container -->
 

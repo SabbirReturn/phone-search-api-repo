@@ -5,15 +5,59 @@ primaryBtn.classList.add('bg-indigo-700')
 
 // load all phone
 
-let loadPhoneInformation= async(search,isShowAll,hasSearch)=>{
+let loadPhoneInformation= async(search = 'samsung',isShowAll,hasSearch)=>{
     let res = await fetch( `https://openapi.programming-hero.com/api/phones?search=${search}`)
     let data = await res.json();
     let phones = data.data
     displayShowAllPhone(phones,isShowAll,hasSearch)
+    
 }
 
+// alway show some phone api
+let loadInitialPhones = async () => {
+    let res = await fetch(`https://openapi.programming-hero.com/api/phones?search=iphone`);
+    let data = await res.json();
+    let phones = data.data;
+
+    // 👉 always show section (random 12)
+    let randomPhones = phones
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 12);
+
+    alwaysShowSomeCard(randomPhones);
+};
+
+loadInitialPhones();
+// always show some card
+let alwaysShowSomeCard = (phones)=>{
+    console.log(phones);
+    let alwaysShowPhone = document.getElementById('alwaysShowPhone')
+    alwaysShowPhone.textContent = ''
+    phones.forEach(phone=>{
+        // console.log(phone)
+        let alwaysShow = document.createElement('div')
+        alwaysShow.classList = 'card bg-base-100 w-full shadow-sm mt-5 py-5'
+        alwaysShow.innerHTML = `
+            <figure>
+                        <img
+                        src="${phone.image}"
+                        alt="Shoes" />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">${phone.phone_name}</h2>
+                        <p>${phone.slug}</p>
+                        <div class="card-actions justify-center">
+                            <button class="btn btn-primary">Buy Now</button>
+                        </div>
+                    </div>
+        
+        `
+        alwaysShowPhone.appendChild(alwaysShow)
+    })
+
+}
 let displayShowAllPhone=(phones,isShowAll,hasSearch)=>{
-        // console.log(phones);
+        console.log(phones);
         let phoneContainer = document.getElementById('phone-container')
         phoneContainer.textContent ='';
 
@@ -54,7 +98,7 @@ let displayShowAllPhone=(phones,isShowAll,hasSearch)=>{
                 </figure>
                     <div class="card-body items-center text-center">
                         <h2 class="card-title">${phone.phone_name}</h2>
-                        <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+                        <p>${phone.slug}</p>
                         <div class="card-actions justify-center">
                             <button onclick = "showDetails('${phone.slug}')"
                             class="btn btn-primary">Show Details</button>
@@ -74,6 +118,11 @@ let searchBtn = (isShowAll,hasSearch)=>{
     toggleLoadingSpine(true);
     let searchContainer = document.getElementById('search-container')
     let searchValue = searchContainer.value;
+
+
+    // hide always section
+    document.getElementById('alwaysShowPhone').classList.add('hidden');
+
     // console.log(searchValue)
     loadPhoneInformation(searchValue,isShowAll,hasSearch)
 }
