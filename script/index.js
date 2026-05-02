@@ -5,18 +5,27 @@ primaryBtn.classList.add('bg-indigo-700')
 
 // load all phone
 
-let loadPhoneInformation= async(search,isShowAll)=>{
+let loadPhoneInformation= async(search,isShowAll,hasSearch)=>{
     let res = await fetch( `https://openapi.programming-hero.com/api/phones?search=${search}`)
     let data = await res.json();
     let phones = data.data
-    displayShowAllPhone(phones,isShowAll)
+    displayShowAllPhone(phones,isShowAll,hasSearch)
 }
 
-let displayShowAllPhone=(phones,isShowAll)=>{
+let displayShowAllPhone=(phones,isShowAll,hasSearch)=>{
         // console.log(phones);
         let phoneContainer = document.getElementById('phone-container')
         phoneContainer.textContent ='';
 
+        // 👉 No phone found condition
+        let availableUnavailable = document.getElementById('availableUnavailable')
+        if(phones.length ===0 && hasSearch){
+            availableUnavailable.classList.remove('hidden')
+        }
+        else{
+            availableUnavailable.classList.add('hidden')
+        }
+   
         // show all phone
         let showAll = document.getElementById('show-all-container')
         if(phones.length>12 && !isShowAll){
@@ -36,7 +45,7 @@ let displayShowAllPhone=(phones,isShowAll)=>{
         // get phone details and view ui
 
             let phoneShow = document.createElement('div')
-            phoneShow.classList = 'card bg-base-100 w-full shadow-sm mt-5'
+            phoneShow.classList = 'card bg-base-100 w-full shadow-sm mt-5 py-5'
             phoneShow.innerHTML = `
                 <figure>
                     <img class = "object-contain rounded-xl w-full h-48"
@@ -60,12 +69,13 @@ let displayShowAllPhone=(phones,isShowAll)=>{
 
 // search phone
 
-let searchBtn = (isShowAll)=>{
+let searchBtn = (isShowAll,hasSearch)=>{
+    hasSearch = true
     toggleLoadingSpine(true);
     let searchContainer = document.getElementById('search-container')
     let searchValue = searchContainer.value;
     // console.log(searchValue)
-    loadPhoneInformation(searchValue,isShowAll)
+    loadPhoneInformation(searchValue,isShowAll,hasSearch)
 }
 
 // Loading spine
